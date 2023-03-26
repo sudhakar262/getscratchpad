@@ -4,23 +4,20 @@ const hbs = require("hbs");
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const app = express();
+const LocalStrategy = require('passport-local').Strategy;
 const session = require("express-session")
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const bcryptjs = require("bcryptjs");
 const crypto = require('crypto');
+const passport = require('passport');
+require('dotenv').config();
+const app = express();
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname , 'views'))
-
-app.use(session({
-  secret: 'mysecretkey',
-  resave: true,
-  saveUninitialized: true
-}));
 
 // Serve the note page
 app.get('/', (req, res) => {
@@ -42,6 +39,12 @@ app.get("/termsofuse", (req ,res)=>{
 app.get("/privacypolicy", (req ,res)=>{
   res.render('privacypolicy')
 });
+
+app.get("/navbar" ,(req , res)=>{
+  res.render('navbar');
+});
+
+
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://sudhakarswaindelphic:XrXjQ3jsbdGEsHHS@delphic1.mfomzhe.mongodb.net/scratchpad?retryWrites=true&w=majority', {
   useNewUrlParser: true,
@@ -99,7 +102,7 @@ app.post('/signup', (req, res) => {
           audience: CLIENT_ID,
       });
       const payload = ticket.getPayload();
-      const { email, given_name, family_name } = payload;
+      const { email, password } = payload;
       // Save user data to database and send response
   }
   verify().catch((error) => console.log(error));
@@ -109,22 +112,73 @@ app.post('/signup', (req, res) => {
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
-  // Check if email exists
-  const user = await User.findOne({ email });
-  if (!user) {
-    return res.status(400).send('Invalid email or password');
-  }
+  try {
+    // find the user with the given email
+    const user = await User.findOne({ email });
 
-  // Check if password is correct
-  const isPasswordValid = bcrypt.compare(password, user.password);
-  if (!isPasswordValid) {
-    return res.status(400).send('/Invalid email or password');
-  }
+    if (!user) {
+      // handle invalid email error
+      res.status(401).send('Invalid email or password');
+    } else {
+      // compare the password with the stored hash
+      const isMatch = await bcrypt.compare(password, user.password);
 
-  res.redirect('/');
-  
+      if (isMatch) {
+        // successful login, redirect to home page
+        res.redirect('/note');
+      } else {
+        // handle invalid password error
+        res.status(401).send('Invalid email or password');
+      }
+    }
+  } catch (err) {
+    // handle database error
+    res.status(500).send('Internal server error');
+  }
 });
 
+app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  secret: 'mysecret',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(
+  (username, password, done) => {
+    // find user in MongoDB by username
+    User.findOne({ username: username }, (err, user) => {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      // compare password hash using bcrypt
+      bcrypt.compare(password, user.password, (err, result) => {
+        if (err) { return done(err); }
+        if (!result) { return done(null, false); }
+        return done(null, user);
+      });
+    });
+  }
+));
+
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
+});
+
+// middleware to check if user is authenticated
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/note');
+};
 
 // Define a route to handle the forgot password form submission
 app.post('/forgot-password', (req, res) => {
@@ -148,6 +202,16 @@ function generateToken() {
 
   // Store the token in the database, along with an expiration date
   storeToken(email, token, new Date(Date.now() + 3600000));
+  function storeToken(email, token, expiration) {
+  const collection = User.collection('password_reset_tokens');
+  collection.updateOne({ email }, { email, token, expiration }, { upsert: true }, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Token stored in the database');
+    }
+  });
+}
 
   // Create a nodemailer transport
   const transporter = nodemailer.createTransport({
@@ -179,6 +243,20 @@ function generateToken() {
     }
   });
 });
+
+
+// Generate a salt value using the bcrypt algorithm
+const saltRounds = 10;
+bcrypt.genSalt(saltRounds, (err, salt) => {
+  if (err) {
+    console.error('Error generating salt:', err);
+    return;
+  }
+
+  // Print the salt value
+  console.log('BCRYPT_SALT:', salt);
+});
+
 
 
 // Start the server

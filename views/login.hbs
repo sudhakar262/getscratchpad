@@ -9,31 +9,27 @@
 </head>
 <body>
     <div class="overlay" id="login-overlay">
-      <div class="login-page">
-        <h2>Login</h2>
-        <form >
-          <form action="/login" method="POST" id="myForm">
-            <div class="imgcontainer">
-              <img src="https://tse1.mm.bing.net/th?id=OIP.nczpMSa69aDJWYGi0tKqggHaHa&pid=Api&P=0" alt="Avatar" class="avatar">
-            </div>
-          <div class="container">
-              <label for="email"><b>Email</b></label>
-              <input type="email" placeholder="Enter Email" name="email" id="email-input" required>
-          
-              <label for="psw"><b>Password</b></label>
-              <input type="password" placeholder="Enter Password" name="password" id="password-input" required>
-
-
-            </div>
-          </form>
-          <button type="submit" value="Sign In" id="submitBtn">Submit</button>
-          <button type="button" onclick="redirectToSignUp()"><a href="./signup.hbs"></a> Sign Up</button>
-          <button type="button" onclick="redirectToForgotPassword()"> <a href="./forgot_password.hbs"></a> Password</button>
-        </form>
-        <p id="errorDiv"></p>
-      </div>
+        <div class="login-page">
+            <h2>Login</h2>
+            <form action="/login" method="POST" id="myForm">
+                <div class="imgcontainer">
+                    <img src="https://tse1.mm.bing.net/th?id=OIP.nczpMSa69aDJWYGi0tKqggHaHa&pid=Api&P=0" alt="Avatar" class="avatar">
+                </div>
+                <div class="container">
+                    <label for="email"><b>Email</b></label>
+                    <input type="email" placeholder="Enter Email" name="email" id="email-input" required>
+                
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" id="password-input" required>
+                </div>
+                <button type="submit" value="Sign In ">Submit</button>
+                <button type="button" onclick="redirectToSignUp()"> Sign Up</button>
+                <button type="button" onclick="redirectToForgotPassword()">Forgot Password</button>
+            </form>
+            <p id="errorDiv"></p>
+        </div>
     </div>
-</body>
 
- <script src="/script.js"></script>
+    <script src="/script.js"></script>
+</body>
 </html>

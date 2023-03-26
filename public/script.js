@@ -4,7 +4,7 @@ const charCount = document.getElementById('char-count');
 const lineCount = document.getElementById('line-count');
 const wordCount = document.getElementById('word-count');
 const saveButton = document.getElementById("save-btn");
-const loginBtn = document.getElementById("login-btn");
+const loginButton = document.getElementById("login-btn");
 const overlay = document.getElementById("login-overlay");
 const loginForm = document.querySelector(".login-page form");
 
@@ -38,8 +38,9 @@ noteTextArea.addEventListener("input", function() {
     alert("You have reached the limit of 1000 characters. Saving to the cloud would be beneficial. Storage is free as of now.");
   }
 });
-loginBtn.addEventListener("click", function() {
-	overlay.style.display = "block";
+
+loginButton.addEventListener("click", function() {
+  window.location.href = "/login";
 });
 let numTries = 0;
 
@@ -90,14 +91,14 @@ note.addEventListener('input', function() {
 });
 
 const termsLink = document.createElement('a');
-termsLink.href = 'http://localhost:3000/termsofuse';
+termsLink.href = 'http://localhost:8000/termsofuse';
 termsLink.innerText = 'Terms of Use';
 termsLink.style.position = 'fixed';
 termsLink.style.right = 0;
 document.body.appendChild(termsLink);
 
 const privacyLink = document.createElement('a');
-privacyLink.href = 'http://localhost:3000/privacypolicy';
+privacyLink.href = 'http://localhost:8000/privacypolicy';
 privacyLink.innerText = 'Privacy Policy';
 privacyLink.style.position ="fixed";
 privacyLink.style.right = 10;
@@ -109,11 +110,11 @@ function showLogin() {
 }
 
 function redirectToSignUp(){
-  window.location.href = "http://localhost:3000/signup"
+  window.location.href = "http://localhost:8000/signup"
 }
 
 function redirectToForgotPassword(){
-  window.location.href = "http://localhost:3000/forgot_password"
+  window.location.href = "http://localhost:8000/forgot_password"
 }
 
 
@@ -123,34 +124,16 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
-function cancelSignUp(){
-  const cancel = document.getElementById("cancel")
-
-  cancel.reset();
-  
-  cancel.style.display = " none";
-}
 
 const cancelBtn = document.getElementById("cancel-btn");
 cancelBtn.addEventListener("click", cancelSignUp);
 
-const googleSignUpBtn = document.getElementById('google-signup-btn');
-    googleSignUpBtn.addEventListener('click', () => {
-        gapi.auth2.getAuthInstance().signIn().then((googleUser) => {
-            const idToken = googleUser.getAuthResponse().id_token;
-            // Send idToken to server for authentication
-            fetch('/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ idToken })
-            }).then((response) => {
-                if (response.ok) {
-                    window.location.href = 'http://localhost:3000/'; // Redirect to dashboard
-                } else {
-                    console.log('Google sign up failed');
-                }
-            });
-        });
-    });
+
+function onSignIn(googleUser) {
+  // Get the user profile information
+  var profile = googleUser.getBasicProfile();
+  
+  // Get the user's email address
+  var email = profile.getEmail();
+  window.location.href = '/note'
+}
