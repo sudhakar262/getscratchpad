@@ -1,35 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/login.css">
-    <title>scratchpad</title>
+	<title>Login and Sign-up Page</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/forgot_password.css">
 </head>
 <body>
-    <div class="overlay" id="login-overlay">
-        <div class="login-page">
-            <h2>Login</h2>
-            <form action="/login" method="POST" id="myForm">
-                <div class="imgcontainer">
-                    <img src="https://tse1.mm.bing.net/th?id=OIP.nczpMSa69aDJWYGi0tKqggHaHa&pid=Api&P=0" alt="Avatar" class="avatar">
-                </div>
-                <div class="container">
-                    <label for="email"><b>Email</b></label>
-                    <input type="email" placeholder="Enter Email" name="email" id="email-input" required>
-                
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="password" id="password-input" required>
-                </div>
-                <button type="submit" value="Sign In ">Submit</button>
-                <button type="button" onclick="redirectToSignUp()"> Sign Up</button>
-                <button type="button" onclick="redirectToForgotPassword()">Forgot Password</button>
-            </form>
-            <p id="errorDiv"></p>
-        </div>
-    </div>
+	<div class="container">
+		<div class="logo">
+			<img src="/public/utils/images/getscratchpad.png" alt="Logo">
+			<div class="social-login">
+				<h3>Login using social media to get quick access</h3>
+				<div class="social-login-buttons">
+					<button><img src="https://s.yimg.com/fz/api/res/1.2/SBnTtvtkyJXCCDtTnKcQUw--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpdDtoPTI0MDtxPTgwO3c9MjQw/https://s.yimg.com/zb/imgv1/c165dc31-f7f7-35c4-8df4-cdd842798724/t_500x300" alt="Facebook"></button>
+					<button><img src="https://s.yimg.com/fz/api/res/1.2/Qpybtr24YAUp2UGFYg1M5A--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpdDtoPTI0MDtxPTgwO3c9MjQw/https://s.yimg.com/zb/imgv1/fe90b2b3-0ac3-3c81-8238-d3724bf23104/t_500x300" alt="Google"></button>
+					<button><img src="https://s.yimg.com/fz/api/res/1.2/WcH8VDX4XMZLqOT_1QFeJQ--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpdDtoPTI0MDtxPTgwO3c9MjQw/https://s.yimg.com/zb/imgv1/efb32ac1-ab75-3801-aee1-666cdf999dfa/t_500x300" alt="Twitter"></button>
+				</div>
+			</div>
+		</div>
+		<div class="form-container" >
+			<h2>Login to your account</h2>
+            <h4>Don’t have an account? <a href="http://localhost:8000/signup" id="signup-link">Sign Up Free!</a></h4>
+			<form id="login-form">
+				<label for="email" aria-label="Email Address"></label>
+				<input type="email" id="email" name="email" required placeholder="Email Address">
+				<label for="password" aria-label="Password"></label>
+				<input type="password" id="password" name="password" required placeholder="Password">
+				<input type="submit" value="Login">
+				<div class="forgot-password"><a href="http://localhost:8000/forgot_password">Forgot Password?</a></div>
+			</form>
+			<div class="signup-link">
+				Don't have an account? <a href="http://localhost:8000/signup" id="signup-link-2">Sign up</a>
+			</div>
+		</div>
+	</div>
 
-    <script src="/script.js"></script>
-</body>
-</html>
+	
+	
+
+

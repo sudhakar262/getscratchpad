@@ -6,7 +6,7 @@ const wordCount = document.getElementById('word-count');
 const saveButton = document.getElementById("save-btn");
 const loginButton = document.getElementById("login-btn");
 const overlay = document.getElementById("login-overlay");
-const loginForm = document.querySelector(".login-page form");
+//const loginForm = document.querySelector(".login-page form");
 
 
 let saveTimeoutId;
@@ -137,3 +137,24 @@ function onSignIn(googleUser) {
   var email = profile.getEmail();
   window.location.href = '/note'
 }
+
+
+const loginForm = document.getElementById("login-form");
+
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault(); // Prevents the form from submitting and reloading the page
+
+  // Get the email and password input fields' values
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  // Validate the user's credentials here (e.g., by sending a POST request to a backend server)
+
+  // If the user's credentials are valid, redirect them to the dashboard page
+  window.location.href = "/dashboard.html";
+
+  // If the user's credentials are invalid, display an error message
+  const errorMessage = document.createElement("p");
+  errorMessage.textContent = "Invalid email or password";
+  loginForm.appendChild(errorMessage);
+});

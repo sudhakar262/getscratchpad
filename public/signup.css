@@ -1,73 +1,145 @@
-* {
-  box-sizing: border-box;
-}
-
+/* Styles for the container that holds both the social login and sign-up sections */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background-image: url(https://t3.ftcdn.net/jpg/03/55/60/70/360_F_355607062_zYMS8jaz4SfoykpWz5oViRVKL32IabTP.jpg);
+  margin-left: 30vh;
+  margin-right: 30vh;
+  width: 70%;
 }
-
 .container {
-  background-color: #ffffff;
-  padding: 20px;
-  margin: 50px auto;
-  max-width: 500px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-h1 {
-  text-align: center;
+/* Styles for the logo and social login section on the left */
+.logo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  height: 70vh;
+  background-color: #4f4d4d;
+  color: #f5f5f5;
 }
 
+.social-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.logo img {
+  max-width: 30px;
+}
+.social-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+
+.social-login h3 {
+  margin-bottom: 10px;
+}
+
+.social-login-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.social-login-buttons button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* Styles for the sign-up section on the right */
+.signup-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #cac2c2;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  height: 70vh;
+  align-items: center;
+}
+
+.signup-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+#signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+input[type="text"],
 input[type="email"],
 input[type="password"] {
   width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1rem;
 }
 
-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+input[type="submit"] {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.25rem;
+  font-size: 1rem;
   cursor: pointer;
-  width: 100%;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #45a049;
+input[type="submit"]:hover {
+  background-color: #0069d9;
 }
 
-.cancelbtn {
-  background-color: #f44336;
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
 }
 
-.signupbtn {
-  float: right;
+.checkbox-container input[type="checkbox"] {
+  margin-right: 0.5rem;
 }
 
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
+.login-link {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  text-align: center;
 }
 
-.g-signin2 {
-  display: block;
-  margin: 10px auto;
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
 }
 
-.btn {
-  display: inline-block;
-  border: none;
-  background-color: #ffffff;
-  color: #333333
+.login-link a:hover {
+  text-decoration: underline;
 }
