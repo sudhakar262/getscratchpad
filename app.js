@@ -43,7 +43,9 @@ app.get("/privacypolicy", (req ,res)=>{
 app.get("/navbar" ,(req , res)=>{
   res.render('navbar');
 });
-
+app.get("/profile" , (req , res)=>{
+  res.render('profile');
+})
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://sudhakarswaindelphic:XrXjQ3jsbdGEsHHS@delphic1.mfomzhe.mongodb.net/scratchpad?retryWrites=true&w=majority', {
