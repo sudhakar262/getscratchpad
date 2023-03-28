@@ -42,21 +42,6 @@ noteTextArea.addEventListener("input", function() {
 loginButton.addEventListener("click", function() {
   window.location.href = "/login";
 });
-let numTries = 0;
-
-function saveToCloud() {
-  if (numTries < 10) {
-    const text = document.getElementById('note').value;
-    if (text.length > 1000) {
-      numTries++;
-      return;
-    }
-  } else {
-    return;
-  }
-
-  window.location.href = '/login';
-}
 // Autosave note to localStorage after 500ms of not typing
 noteTextArea.addEventListener('input', () => {
   clearTimeout(saveTimeoutId);
@@ -125,19 +110,6 @@ function isValidEmail(email) {
 }
 
 
-const cancelBtn = document.getElementById("cancel-btn");
-cancelBtn.addEventListener("click", cancelSignUp);
-
-
-function onSignIn(googleUser) {
-  // Get the user profile information
-  var profile = googleUser.getBasicProfile();
-  
-  // Get the user's email address
-  var email = profile.getEmail();
-  window.location.href = '/note'
-}
-
 
 const loginForm = document.getElementById("login-form");
 
@@ -151,7 +123,7 @@ loginForm.addEventListener("submit", (event) => {
   // Validate the user's credentials here (e.g., by sending a POST request to a backend server)
 
   // If the user's credentials are valid, redirect them to the dashboard page
-  window.location.href = "/dashboard.html";
+  window.location.href = "/http://localhost:8000/note";
 
   // If the user's credentials are invalid, display an error message
   const errorMessage = document.createElement("p");

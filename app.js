@@ -59,6 +59,8 @@ mongoose.connect('mongodb+srv://sudhakarswaindelphic:XrXjQ3jsbdGEsHHS@delphic1.m
 const userSchema = new mongoose.Schema({
   email: String,
   password: String,
+  fullname : String ,
+
 });
 
 // Define user model
@@ -93,23 +95,6 @@ app.post('/signup', async (req, res) => {
     res.status(500).send(error);
   }
 });
-app.post('/signup', (req, res) => {
-  const idToken = req.body.idToken;
-  const CLIENT_ID = '398165584439-c8ah1893rb41it2vl1icqircp4ud83mg.apps.googleusercontent.com';
-  const client = new OAuth2Client(CLIENT_ID);
-
-  async function verify() {
-      const ticket = await client.verifyIdToken({
-          idToken: idToken,
-          audience: CLIENT_ID,
-      });
-      const payload = ticket.getPayload();
-      const { email, password } = payload;
-      // Save user data to database and send response
-  }
-  verify().catch((error) => console.log(error));
-});
-
 // Login endpoint
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;

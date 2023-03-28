@@ -9,7 +9,7 @@
 <body>
 	<div class="container">
 		<div class="logo">
-			<img src="../getscratchpad.png" alt="Logo">
+			<img src="/images/getscratchpad.png" alt="Logo">
 			<div class="social-login">
 				<h3>Login using social media to get quick access</h3>
 				<div class="social-login-buttons">
@@ -30,14 +30,17 @@
 		<input type="password" id="password" name="password" required placeholder="Password">
 		<div class="checkbox-container">
 			<input type="checkbox" id="privacy-policy" name="privacy-policy" required>
-			<label for="privacy-policy">I agree to the <a href="#">privacy policy</a> and <a href="#">terms of service</a>.</label>
+			<label for="privacy-policy">I agree to the <a href="http://localhost:8000/privacypolicy">privacy policy</a> and <a href="http://localhost:8000/termsofuse">terms of service</a>.</label>
 		</div>
-		<input type="submit" value="Sign Up">
+		<input type="submit" value="Sign Up with email" class="signupbtn">
 	</form>
 	<div class="login-link">
 		Already have an account? <a href="http://localhost:8000/login">Log in</a>
 	</div>
 </div>
+</body>
+<script src="/script.js"></script>
+</html>
 
 	
 	

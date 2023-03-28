@@ -37,7 +37,7 @@ body {
   margin-top: 20px;
 }
 .logo img {
-  max-width: 30px;
+  max-width: 200px;
 }
 .social-login {
   display: flex;
@@ -56,12 +56,16 @@ body {
   display: flex;
   flex-direction: row;
 }
+.social-login-buttons button img {
+  max-width: 30px;
+}
 
 .social-login-buttons button {
   border: none;
   background-color: transparent;
   cursor: pointer;
 }
+
 
 /* Styles for the sign-up section on the right */
 .signup-container {
@@ -71,7 +75,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #cac2c2;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(80, 14, 14, 0.1);
   height: 70vh;
   align-items: center;
 }
